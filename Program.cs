@@ -7,6 +7,8 @@ class GitAutomation
     {
         string directory = args.Length > 0 ? args[0] : ".";
         string currentDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        
+        WriteTextToFile("log.txt", $"😎🌲Automated commit at 😂 {currentDateTime}");
 
         RunGitCommand($"cd {directory}");
         RunGitCommand($"git add .");
@@ -28,5 +30,10 @@ class GitAutomation
         using StreamReader reader = process.StandardOutput;
         string result = reader.ReadToEnd();
         Console.WriteLine(result);
+    }
+    static void WriteTextToFile(string path, string text)
+    {
+        using StreamWriter writer = new(path, true);
+        writer.WriteLine(text);
     }
 }
