@@ -17,7 +17,6 @@ class GitAutomation
         RunGitCommand(directory, $"git push origin master");
 
         Console.WriteLine("Done");
-        Console.ReadLine();
     }
 
     static void RunGitCommand( string WorkingDirectory, string command)
