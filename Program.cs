@@ -15,6 +15,8 @@ class GitAutomation
         RunGitCommand($"git commit -m \"😎🌲Automated commit at 😂 {currentDateTime}\"");
         RunGitCommand("git pull origin main");
         RunGitCommand("git push origin main");
+
+        Console.ReadLine();
     }
 
     static void RunGitCommand(string command)
