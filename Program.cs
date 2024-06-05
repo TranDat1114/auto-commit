@@ -5,10 +5,11 @@ class GitAutomation
 {
     static void Main(string[] args)
     {
-        
+
         string directory = args.Length > 0 ? args[0] : ".";
         string currentDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-Console.WriteLine (args[0]);
+        Console.WriteLine($"Args {args[0]}");
+        Console.WriteLine($"Directory: {directory}");
         WriteTextToFile("README.md", $"😎🌲Automated commit at 😂 {currentDateTime}");
 
         RunGitCommand($"cd {directory}");
