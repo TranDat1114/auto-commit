@@ -14,8 +14,8 @@ class GitAutomation
 
         RunGitCommand(directory,$"git add ." );
         RunGitCommand(directory,$"git commit -m \"Automated commit at {currentDateTime}\"");
-        RunGitCommand(directory, $"git pull origin master");
-        RunGitCommand(directory, $"git push origin master");
+        RunGitCommand(directory, $"git pull origin main");
+        RunGitCommand(directory, $"git push origin main");
 
         Console.WriteLine("Done");
     }
