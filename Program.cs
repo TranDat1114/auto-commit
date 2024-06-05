@@ -10,15 +10,13 @@ class GitAutomation
         string currentDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         Console.WriteLine($"Args {args[0]}");
         Console.WriteLine($"Directory: {directory}");
-        WriteTextToFile("README.md", $"😎🌲Automated commit at 😂 {currentDateTime}");
+        WriteTextToFile($@"{directory}\README.md", $"😎🌲Automated commit at 😂 {currentDateTime}");
 
         RunGitCommand($"cd {directory}");
         RunGitCommand($"git add .");
         RunGitCommand($"git commit -m \"😎🌲Automated commit at 😂 {currentDateTime}\"");
         RunGitCommand("git pull origin main");
         RunGitCommand("git push origin main");
-
-        Console.ReadLine();
     }
 
     static void RunGitCommand(string command)
