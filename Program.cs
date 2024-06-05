@@ -7,8 +7,8 @@ class GitAutomation
     {
         string directory = args.Length > 0 ? args[0] : ".";
         string currentDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-        
-        WriteTextToFile("log.txt", $"😎🌲Automated commit at 😂 {currentDateTime}");
+
+        WriteTextToFile("README.md", $"😎🌲Automated commit at 😂 {currentDateTime}");
 
         RunGitCommand($"cd {directory}");
         RunGitCommand($"git add .");
