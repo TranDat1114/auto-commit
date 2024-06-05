@@ -9,8 +9,8 @@ class GitAutomation
         string currentDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
         RunGitCommand($"cd {directory}");
-        RunGitCommand($" git add .");
-        RunGitCommand($"git commit -m \"Chúc bạn ngày {currentDateTime} thật tuyệt vời\"");
+        RunGitCommand($"git add .");
+        RunGitCommand($"git commit -m \"Automated commit at {currentDateTime}\"");
         RunGitCommand("git pull origin main");
         RunGitCommand("git push origin main");
     }
@@ -21,7 +21,7 @@ class GitAutomation
         {
             RedirectStandardOutput = true,
             UseShellExecute = false,
-            CreateNoWindow = true
+            CreateNoWindow = false
         };
 
         using Process process = Process.Start(startInfo)!;
