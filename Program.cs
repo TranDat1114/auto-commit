@@ -10,7 +10,7 @@ class GitAutomation
 
         RunGitCommand($"cd {directory}");
         RunGitCommand($"git add .");
-        RunGitCommand($"git commit -m \"Automated commit at {currentDateTime}\"");
+        RunGitCommand($"git commit -m \"😎🌲Automated commit at 😂 {currentDateTime}\"");
         RunGitCommand("git pull origin main");
         RunGitCommand("git push origin main");
     }
