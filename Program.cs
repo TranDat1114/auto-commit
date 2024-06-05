@@ -12,27 +12,34 @@ class GitAutomation
         Console.WriteLine($"Directory: {directory}");
         WriteTextToFile($@"{directory}\README.md", $"😎🌲Automated commit at 😂 {currentDateTime}");
 
-        RunGitCommand($"cd {directory}");
-        RunGitCommand($"git add .");
-        RunGitCommand($"git commit -m \"😎🌲Automated commit at 😂 {currentDateTime}\"");
-        RunGitCommand("git pull origin main");
-        RunGitCommand("git push origin main");
+        RunGitCommand($"cd {directory} && git add .");
+        RunGitCommand($"cd {directory} && git commit -m \"Automated commit at {currentDateTime}\"");
+        RunGitCommand($"cd {directory} && git push origin master");
+        
+        Console.WriteLine("Done");
+        Console.ReadLine();
     }
 
     static void RunGitCommand(string command)
     {
-        ProcessStartInfo startInfo = new("cmd.exe", $"/c {command}")
+        ProcessStartInfo startInfo = new()
         {
+            FileName = "cmd.exe",
+            RedirectStandardInput = true,
             RedirectStandardOutput = true,
             UseShellExecute = false,
-            CreateNoWindow = false
+            CreateNoWindow = true
         };
 
-        using Process process = Process.Start(startInfo)!;
-        using StreamReader reader = process.StandardOutput;
-        string result = reader.ReadToEnd();
-        Console.WriteLine(result);
+        Process process = new() { StartInfo = startInfo };
+        process.Start();
+        process.StandardInput.WriteLine(command);
+        process.StandardInput.Flush();
+        process.StandardInput.Close();
+        process.WaitForExit();
+        Console.WriteLine(process.StandardOutput.ReadToEnd());
     }
+
     static void WriteTextToFile(string path, string text)
     {
         using StreamWriter writer = new(path, true);
