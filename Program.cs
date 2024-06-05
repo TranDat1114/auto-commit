@@ -12,30 +12,29 @@ class GitAutomation
         Console.WriteLine($"Directory: {directory}");
         WriteTextToFile($@"{directory}\README.md", $"😎🌲Automated commit at 😂 {currentDateTime}");
 
-        RunGitCommand($"cd {directory} && git add .");
-        RunGitCommand($"cd {directory} && git commit -m \"Automated commit at {currentDateTime}\"");
-        RunGitCommand($"cd {directory} && git push origin master");
-        
+        RunGitCommand(directory,$"git add ." );
+        RunGitCommand(directory,$"git commit -m \"Automated commit at {currentDateTime}\"");
+        RunGitCommand(directory, $"git push origin master");
+
         Console.WriteLine("Done");
         Console.ReadLine();
     }
 
-    static void RunGitCommand(string command)
+    static void RunGitCommand( string WorkingDirectory, string command)
     {
         ProcessStartInfo startInfo = new()
         {
             FileName = "cmd.exe",
-            RedirectStandardInput = true,
+            RedirectStandardInput = false,
             RedirectStandardOutput = true,
             UseShellExecute = false,
-            CreateNoWindow = true
+            CreateNoWindow = true,
+            WorkingDirectory = WorkingDirectory,
+            Arguments = $"/c {command}"
         };
 
         Process process = new() { StartInfo = startInfo };
         process.Start();
-        process.StandardInput.WriteLine(command);
-        process.StandardInput.Flush();
-        process.StandardInput.Close();
         process.WaitForExit();
         Console.WriteLine(process.StandardOutput.ReadToEnd());
     }
